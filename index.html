@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNC NSBE Partnership</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #1d1d1f;
+            background: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #007AFF;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1d1d1f;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007AFF;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 150px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Content Sections */
+        .section {
+            padding: 100px 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #1d1d1f;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .metric-card {
+            background: #f5f5f7;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .metric-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: #007AFF;
+            margin-bottom: 10px;
+        }
+
+        .metric-label {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .metric-description {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Demographics Charts */
+        .chart-container {
+            background: #f5f5f7;
+            padding: 40px;
+            border-radius: 20px;
+            margin: 40px 0;
+        }
+
+        .chart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .chart-bar {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+        }
+
+        .chart-label {
+            width: 200px;
+            font-weight: 500;
+        }
+
+        .chart-bar-fill {
+            height: 25px;
+            background: linear-gradient(90deg, #007AFF, #5AC8FA);
+            border-radius: 12px;
+            margin: 0 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .chart-percentage {
+            font-weight: 600;
+            color: #007AFF;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #007AFF;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 40px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .timeline-content {
+            background: #f5f5f7;
+            padding: 30px;
+            border-radius: 15px;
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: auto;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            width: 20px;
+            height: 20px;
+            background: #007AFF;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .testimonial {
+            background: #f5f5f7;
+            padding: 40px;
+            border-radius: 20px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .testimonial::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50px;
+            width: 0;
+            height: 0;
+            border-left: 15px solid transparent;
+            border-right: 15px solid transparent;
+            border-top: 15px solid #f5f5f7;
+        }
+
+        .testimonial-text {
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: #007AFF;
+        }
+
+        .testimonial-role {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Partnership Tiers */
+        .tier-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .tier-card {
+            background: white;
+            border: 2px solid #f0f0f0;
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tier-card:hover {
+            border-color: #007AFF;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 122, 255, 0.1);
+        }
+
+        .tier-diamond {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .tier-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 10px;
+        }
+
+        .tier-features {
+            margin: 20px 0;
+        }
+
+        .tier-feature {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .tier-diamond .tier-feature {
+            background: rgba(255,255,255,0.9);
+            color: #333;
+        }
+
+        .tier-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #007AFF;
+            margin-top: 20px;
+        }
+
+        .tier-diamond .tier-price {
+            color: white;
+        }
+
+        /* Footer */
+        footer {
+            background: #1d1d1f;
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .metric-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .testimonials {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .timeline-dot {
+                left: 20px;
+            }
+
+            .chart-label {
+                width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">UNC NSBE</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#community">Community</a></li>
+                <li><a href="#growth">Growth</a></li>
+                <li><a href="#why-partner">Why Partner</a></li>
+                <li><a href="#testimonials">Testimonials</a></li>
+                <li><a href="#success">Success Stories</a></li>
+                <li><a href="#sponsorship">Sponsorship</a></li>
+            </ul>
+          <a href="mailto:nsbeunc@gmail.com" class="cta-button" style="margin-left: 20px;">Partner With Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Building the Future</h1>
+            <p>The heart and soul of UNC Engineering excellence</p>
+            <a href="#community" class="cta-button">Discover Our Story</a>
+        </div>
+    </section>
+
+    <!-- Overview Section -->
+    <section id="community" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Community</h2>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-number">500%</div>
+                    <div class="metric-label">Membership Growth</div>
+                    <div class="metric-description">From 20 to 120 members in 3 semesters</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">367%</div>
+                    <div class="metric-label">Leadership Expansion</div>
+                    <div class="metric-description">Executive team grew from 3 to 14 officers</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">100%</div>
+                    <div class="metric-label">Retention Rate</div>
+                    <div class="metric-description">Current semester leadership retention</div>
+                </div>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">Class Distribution</div>
+                <div class="chart-bar">
+                    <div class="chart-label">Sophomores</div>
+                    <div class="chart-bar-fill" style="width: 39.4%;"></div>
+                    <div class="chart-percentage">39.4% (~35 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Freshmen</div>
+                    <div class="chart-bar-fill" style="width: 27.3%;"></div>
+                    <div class="chart-percentage">27.3% (~24 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Seniors</div>
+                    <div class="chart-bar-fill" style="width: 18.2%;"></div>
+                    <div class="chart-percentage">18.2% (~16 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Juniors</div>
+                    <div class="chart-bar-fill" style="width: 15.2%;"></div>
+                    <div class="chart-percentage">15.2% (~13 members)</div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Major Distribution</div>
+                <div class="chart-bar">
+                    <div class="chart-label">Computer Science</div>
+                    <div class="chart-bar-fill" style="width: 31.6%;"></div>
+                    <div class="chart-percentage">31.6% (~28-30 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Biomedical Engineering</div>
+                    <div class="chart-bar-fill" style="width: 28.9%;"></div>
+                    <div class="chart-percentage">28.9% (~25-26 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Environmental Sci/Eng</div>
+                    <div class="chart-bar-fill" style="width: 10.5%;"></div>
+                    <div class="chart-percentage">10.5% (~9-10 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Biology</div>
+                    <div class="chart-bar-fill" style="width: 10.5%;"></div>
+                    <div class="chart-percentage">10.5% (~9-10 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Information Science</div>
+                    <div class="chart-bar-fill" style="width: 7.9%;"></div>
+                    <div class="chart-percentage">7.9% (~7-8 members)</div>
+                </div>
+                <div class="chart-bar">
+                    <div class="chart-label">Other Fields</div>
+                    <div class="chart-bar-fill" style="width: 11.1%;"></div>
+                    <div class="chart-percentage">11.1% (~10+ members)</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Growth Timeline -->
+    <section id="growth" class="section">
+        <div class="container">
+            <h2 class="section-title">Our Growth Story</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Semester 1: Foundation</h3>
+                        <p><strong>3 Executive Members</strong> | <strong>20 Registered Members</strong></p>
+                        <p>Established UNC NSBE with a vision to create a home for black engineers and build community.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Semester 2: Acceleration</h3>
+                        <p><strong>8 Executive Members</strong> | <strong>40 Registered Members</strong></p>
+                        <p>70% retention rate. Doubled membership and expanded programming. Sponsored 3 full conference attendees and 5 partial.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>Semester 3: Excellence</h3>
+                        <p><strong>14 Executive Members</strong> | <strong>120 Registered Members</strong></p>
+                        <p>100% retention rate. Became the heart of UNC Engineering. Trusted to start the engineering program at UNC.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Partner Section -->
+    <section id="why-partner" class="section">
+        <div class="container">
+            <h2 class="section-title">Why Partner with UNC NSBE?</h2>
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <h4>Exceptional Talent Pipeline</h4>
+                    <p>Access to 120+ high-achieving engineering students across Computer Science, Biomedical Engineering, and other critical STEM fields with proven academic excellence.</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Campus Influence</h4>
+                    <p>We're not just another student org - we're the heart of UNC Engineering. We partner with every engineering organization and lead major campus initiatives.</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Proven Growth</h4>
+                    <p>500% membership growth and 100% leadership retention demonstrate our commitment to excellence and sustainable impact.</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Diverse Excellence</h4>
+                    <p>Our members represent the future of engineering - culturally responsible leaders who excel academically and positively impact their communities.</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Strategic Location</h4>
+                    <p>Located in the heart of the Research Triangle, with easy access to major tech hubs and innovation centers.</p>
+                </div>
+                <div class="metric-card">
+                    <h4>Trusted Leadership</h4>
+                    <p>University administration trusted us to start the engineering program at UNC, demonstrating our organizational excellence and vision.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section">
+        <div class="container">
+            <h2 class="section-title">Member Success Stories</h2>
+            <div class="testimonials">
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Being a part of UNC NSBE allowed me to explore my interests in engineering further and land a full time job offer"
+                    </div>
+                    <div class="testimonial-author">Nathan Kelete</div>
+                    <div class="testimonial-role">Charles Schwab Full-Time Offer</div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-text">
+                        "Being a member of UNC NSBE has allowed me to be around like minded individuals and connect with opportunities I didn't know about"
+                    </div>
+                    <div class="testimonial-author">Millie Kiembe</div>
+                    <div class="testimonial-role">Microsoft SWE Intern</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Stories Section -->
+    <section id="success" class="section">
+        <div class="container">
+            <h2 class="section-title">Partnership Success Stories</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Capital One Partnership</h4>
+                        <p>Hosted exclusive recruitment events connecting top-tier students with Capital One opportunities, resulting in multiple internship and full-time offers.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Jane Street Collaboration</h4>
+                        <p>Organized technical workshops and recruitment sessions, providing our members with direct access to quantitative trading opportunities.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>National Conference Impact</h4>
+                        <p>Sponsored 8 members to attend the national NSBE conference, leading to numerous job offers and graduate school acceptances.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h4>Big Tech Placements</h4>
+                        <p>10+ members successfully placed into FAANG companies and other top-tier tech firms through our networking and professional development programs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campus Impact Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Campus Impact</h2>
+            
+            <div class="metric-grid">
+                <div class="metric-card">
+                    <div class="metric-number">100%</div>
+                    <div class="metric-label">Engineering Orgs</div>
+                    <div class="metric-description">Partnered with every engineering organization on campus</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">8</div>
+                    <div class="metric-label">Conference Attendees</div>
+                    <div class="metric-description">Sponsored members to national conference</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-number">10+</div>
+                    <div class="metric-label">Big Tech Placements</div>
+                    <div class="metric-description">Members placed into FAANG and top-tier tech companies</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 80px;">
+                <h3 style="font-size: 2rem; margin-bottom: 40px; text-align: center;">Leadership Achievements</h3>
+                <div class="metric-grid">
+                    <div class="metric-card">
+                        <h4>Technical Excellence</h4>
+                        <p>AI Chatbot Programming Events, Hackathons, Research Application Support</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Corporate Partnerships</h4>
+                        <p>Recruitment events with Capital One, Jane Street, and other major firms</p>
+                    </div>
+                    <div class="metric-card">
+                        <h4>Program Leadership</h4>
+                        <p>Trusted to start the engineering program at UNC and lead inaugural Engineering Week</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsorship Packages -->
+    <section id="sponsorship" class="section">
+        <div class="container">
+            <h2 class="section-title">Sponsorship Packages 2025-2026</h2>
+            <p style="text-align: center; margin-bottom: 40px; color: #666; font-size: 1.1rem;">Choose from one of our four comprehensive sponsorship packages to help our chapter increase the number of culturally responsible Black engineers who excel academically, succeed professionally and positively impact the community.</p>
+            
+            <div class="tier-grid">
+                <div class="tier-card">
+                    <div class="tier-name" style="background: #000; color: white;">Affiliate</div>
+                    <div class="tier-features">
+                        <div class="tier-feature">
+                            Your company will get access to our chapter Resume Book
+                        </div>
+                        <div class="tier-feature">
+                            Your company will be able to host a corporate networking social
+                        </div>
+                    </div>
+                    <div class="tier-price">$1,750</div>
+                </div>
+                
+                <div class="tier-card">
+                    <div class="tier-name" style="background: #C0C0C0; color: white;">Silver</div>
+                    <div class="tier-features">
+                        <div class="tier-feature">
+                            Your company will get an invitation to our annual corporate appreciation dinner
+                        </div>
+                        <div class="tier-feature">
+                            Your company will have the opportunity to sponsor general body meetings of your choosing
+                        </div>
+                    </div>
+                    <div class="tier-price">$2,500</div>
+                </div>
+                
+                <div class="tier-card">
+                    <div class="tier-name" style="background: #FFD700; color: black;">Gold</div>
+                    <div class="tier-features">
+                        <div class="tier-feature">
+                            Sponsor a student of your choice for the national convention
+                        </div>
+                        <div class="tier-feature">
+                            Sponsor a specific event of your choice
+                        </div>
+                        <div class="tier-feature">
+                            Your company name and logo will be on the UNC NSBE merchandise
+                        </div>
+                    </div>
+                    <div class="tier-price">$3,500</div>
+                </div>
+                
+                <div class="tier-card tier-diamond">
+                    <div class="tier-name" style="background: rgba(255,255,255,0.3); color: white;">Diamond</div>
+                    <div class="tier-features">
+                        <div class="tier-feature">
+                            Your company will have the opportunity to host a workshop of your choosing
+                        </div>
+                        <div class="tier-feature">
+                            Your company will have the opportunity to host a panel of employees from your company
+                        </div>
+                        <div class="tier-feature">
+                            Your company will be able to take a part in our executive mentorship program
+                        </div>
+                    </div>
+                    <div class="tier-price">$4,000+</div>
+                </div>
+            </div>
+
+            <div style="background: #f5f5f7; padding: 30px; border-radius: 15px; margin-top: 40px; text-align: center;">
+                <h4 style="margin-bottom: 15px; color: #007AFF;">Custom Partnership Options</h4>
+                <p style="color: #666;">These packages don't work for your organization? Contact us to put together a package that makes sense for you and your company's goals.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h3>UNC NSBE</h3>
+            <p>Building the future of engineering excellence at the
